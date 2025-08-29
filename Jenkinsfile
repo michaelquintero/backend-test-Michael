@@ -9,7 +9,7 @@ pipeline {
     }
             }
         stage{
-                        steps {
+                steps {
                 sh 'npm install'
             }
         }

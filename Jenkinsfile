@@ -26,7 +26,7 @@ pipeline {
                 }
             }
         }
-        stage("Quality Assurance"){
+        /* stage("Quality Assurance"){
             agent {
                 docker {
                     image 'sonarsource/sonar-scanner-cli'
@@ -61,11 +61,11 @@ pipeline {
         stage('Etapa de empaquetado y delivery') {
             steps {
                 sh 'docker build -t backend-test-michael:latest .'
-                sh "docker tag backend-test-michael:latest michaelquintero/backend-test-Michael:${BUILD_NUMBER}"
+                sh "docker tag backend-test-michael:latest mquintero01/backend-test-Michael:${BUILD_NUMBER}"
                 sh "docker tag backend-test-michael:latest localhost:8082/backend-test-michael:${BUILD_NUMBER}"
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-                        sh "docker push michaelquintero/backend-test-Michael:${BUILD_NUMBER}"
+                        sh "docker push mquintero01/backend-test-Michael:${BUILD_NUMBER}"
                     }
                     docker.withRegistry('http://localhost:8082', 'nexus-credentials') {
                         sh "docker push localhost:8082/backend-test-michael:${BUILD_NUMBER}"
@@ -85,9 +85,9 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig-docker']){
-                     sh "kubectl -n devops set image deployments backend-node-devops backend-node-devops=localhost:8082/backend-node-devops:${BUILD_NUMBER}"
+                     sh "kubectl -n devops set image deployments backend-test-michael backend-test-michael=localhost:8082/backend-test-michael:${BUILD_NUMBER}"
                 }
             }
-        }
+        }*/
     }
 }

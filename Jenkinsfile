@@ -8,7 +8,7 @@ pipeline {
         }
         stage('En construccion') {
             steps {
-                echo 'Testing...'
+                echo 'Building...'
             }
         }
         stage('Deploy') {

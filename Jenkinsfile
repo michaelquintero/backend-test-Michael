@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent any{
+        docker{
+            image 'node:18-alpine'
+            args '-v /var/jenkins_home/cache:/root/.npm'
+    }
     stages {
         stage('Instalacion de dependencias') {
             steps {
@@ -16,5 +20,6 @@ pipeline {
                 echo 'Deploying...'
             }
         }
+    }
     }
 }
